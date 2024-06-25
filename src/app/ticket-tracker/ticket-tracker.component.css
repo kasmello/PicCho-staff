@@ -26,6 +26,7 @@
 
 .queue {
     width: 51%
+    
 }
 
 .inactive {
@@ -50,7 +51,106 @@
     border-color: #3b336586;
     border-style: solid;
     border-radius: 10px;
+    box-sizing: border-box;
+    text-align:center;
+
 }
+
+
+
+.ticket-box .ticket-list {
+    width: 40%;
+    /* margin: 10px; */
+    /* padding: 10px; */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    
+}
+
+table th, table td {
+    padding: 8px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+table thead {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    width: 100%
+}
+
+.inactive-table td button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #9f4bca;
+    color: white;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.inactive-table td button:hover {
+    background-color: #c577ec;
+}
+
+input {
+    width: 40px;
+}
+
+
+
+.ticket-box .inputs {
+    width: 60%;
+}
+
+.ticket-list {
+    background-color: rgb(205, 201, 201);
+    overflow-y: scroll;
+    overflow-x: scroll;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px; /* Padding on both left and right */
+    box-sizing: border-box;
+}
+
+.left-content {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between the left-aligned items */
+}
+
+.ticket-header button {
+    padding: 5px 10px; /* Adjust button padding for better appearance */
+    border: none;
+    border-radius: 4px;
+    background-color: #e6900d;
+    color: white;
+    cursor: pointer;
+}
+
+.ticket-header button:hover {
+    background-color: #e4a340;
+}
+
+.ticket-box {
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+
+
 
 .inactive.ticket-box {
     display: flex;
