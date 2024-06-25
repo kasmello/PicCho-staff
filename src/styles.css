@@ -1,41 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
     font-family: 'Odin';
-    src: url('/assets/fonts/Odin\ Rounded\ -\ Bold.otf') format('opentype');
+    src: url('/PicCho-staff/assets/fonts/Odin\ Rounded\ -\ Bold.otf') format('opentype');
     font-weight: normal;
     font-style: bold;
 }
 
 @font-face {
     font-family: 'Kind Sans';
-    src: url('/assets/fonts/Kind\ Sans\ Thin.otf') format('opentype');
+    src: url('/PicCho-staff/assets/fonts/Kind\ Sans\ Thin.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Goli';
-    src: url('/assets/fonts/Goli-Regular.otf') format('opentype');
+    src: url('/PicCho-staff/assets/fonts/Goli-Regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Goli Bold';
-    src: url('/assets/fonts/Goli-SemiBold.otf') format('opentype');
+    src: url('/PicCho-staff/assets/fonts/Goli-SemiBold.otf') format('opentype');
     font-weight: normal;
     font-style: bold;
 }
 
 @font-face {
     font-family: 'Manjari';
-    src: url('/assets/fonts/Manjari-Regular.ttf') format('truetype');
+    src: url('/PicCho-staff/assets/fonts/Manjari-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Manjari Bold';
-    src: url('/assets/fonts/Manjari-Bold.ttf') format('truetype');
+    src: url('/PicCho-staff/assets/fonts/Manjari-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: bold;
 }
