@@ -6,6 +6,7 @@ export interface TicketItem {
     hide: boolean;
     people: number;
     queueStart: Date | null;
+    promisedStart: Date | null;
     sessionStart: Date | null;
     sessionEnd: Date | null;
 

@@ -15,8 +15,8 @@ export class TicketTrackerComponent implements OnInit {
   queuePurplePeopleQuickVar: number;
   marginConstant = 2
   invalid = false;
-  errorMessage: string;
-  successMessage: string;
+  errorMessage: string = '';
+  successMessage: string = '';
 
   shuffleDown(colour: string, order: number) {
     this.tickets = this.tickets.map(obj => {
@@ -30,33 +30,34 @@ export class TicketTrackerComponent implements OnInit {
 
   resetTickets() {
     this.tickets = [
-      {number: 0, order: 0,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 1, order: 1,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 2, order: 2,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 3, order: 3,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 4, order: 4,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 5, order: 5,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 6, order: 6,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 7, order: 7,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 8, order: 8,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 9, order: 9,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 10, order: 10, colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 11, order: 11, colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 12, order: 12, colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 0, order: 0, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 1, order: 1, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 2, order: 2, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 3, order: 3, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 4, order: 4, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 5, order: 5, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 6, order: 6, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 7, order: 7, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 8, order: 8, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 9, order: 9, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 10, order: 10, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 11, order: 11, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null},
-      {number: 12, order: 12, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, sessionStart: null, sessionEnd:null}
+      {number: 0, order: 0,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 1, order: 1,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 2, order: 2,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 3, order: 3,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 4, order: 4,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 5, order: 5,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 6, order: 6,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 7, order: 7,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 8, order: 8,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 9, order: 9,colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 10, order: 10, colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 11, order: 11, colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 12, order: 12, colour: "blue", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 0, order: 0, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 1, order: 1, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 2, order: 2, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 3, order: 3, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 4, order: 4, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 5, order: 5, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 6, order: 6, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 7, order: 7, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 8, order: 8, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 9, order: 9, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 10, order: 10, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 11, order: 11, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null},
+      {number: 12, order: 12, colour: "purple", status: "inactive", hide: false, people: 0, queueStart: null, promisedStart: null, sessionStart: null, sessionEnd:null}
     ]
+    this.setSuccessMessage('All tickets have been reset')
   }
 
   inactiveBlueFilter = {
@@ -115,15 +116,22 @@ export class TicketTrackerComponent implements OnInit {
     hiddenFilter: true
   };
 
-  checkToProceed(value: number, min: number, max: number, valueLabel: string) {
+  setErrorMessage(error: string) {
+    this.successMessage = '';
+    this.errorMessage = error;
+  }
+
+  setSuccessMessage(success: string) {
+    this.errorMessage = '';
+    this.successMessage = success;
+  }
+
+  checkToProceed(value: number, min: number, max: number) {
+    this.errorMessage='';
     if (!value) {
-      this.errorMessage = 'ERROR: You must enter a number'
+      this.setErrorMessage('ERROR: You must enter a number')
     } else if (value < min || value > max) {
-      this.errorMessage = `ERROR: Number must be in between ${min} and ${max}`
-    } else {
-      this.errorMessage=null;
-      this.successMessage=`${valueLabel} has successfully been set to ${value}`
-      
+      this.setErrorMessage(`ERROR: Number must be in between ${min} and ${max}`)
     }
 
   }
@@ -135,12 +143,16 @@ export class TicketTrackerComponent implements OnInit {
       if (this.tickets[index].order === -1) {
         this.unhidden[colour]++;
         this.tickets[index].order = this.unhidden[colour];
+        this.setSuccessMessage(`Ticket ${number} (${colour}) has been unhidden`)
       } else {
         this.shuffleDown(colour, this.tickets[index].order);
         this.tickets[index].order = -1;
         this.unhidden[colour]--;
+        this.setSuccessMessage(`Ticket ${number} (${colour}) has been hidden`)
       }
       this.tickets = this.tickets.map(obj => obj);
+    } else {
+      this.setErrorMessage(`Ticket ${number} (${colour}) has failed to be hidden/unhidden`)
     }
 
   }
@@ -158,9 +170,15 @@ export class TicketTrackerComponent implements OnInit {
       this.tickets[index].status = 'queue';
       this.tickets[index].people = people;
       this.tickets[index].queueStart = new Date();
+      this.tickets[index].promisedStart = this.addMinutes(this.getEstimatedWaitTime(this.tickets[index].number, colour),this.tickets[index].queueStart)
       this.tickets = this.tickets.map(obj => obj);
+      colour==='blue' ? this.inactiveBluePeopleVar=null : this.inactivePurplePeopleVar=null;
+      this.setSuccessMessage(`Ticket ${this.tickets[index].number} (${colour}) has been queued`)
+    } else {
+      this.setErrorMessage(`Ticket ${this.tickets[index].number} (${colour}) failed to queue`)
     }
-    colour==='blue' ? this.inactiveBluePeopleVar=null : this.inactivePurplePeopleVar=null
+    
+    
 
 
   }
@@ -193,7 +211,7 @@ export class TicketTrackerComponent implements OnInit {
     !start ? start = new Date() : null;
     !end ? end = new Date() : null;
     const diffInMilliseconds = end.getTime() - start.getTime();
-    const diffInMinutes = Math.round(diffInMilliseconds / (1000 * 60));
+    const diffInMinutes = Math.ceil(diffInMilliseconds / (1000 * 60));
     return diffInMinutes;
   }
 
@@ -236,6 +254,9 @@ export class TicketTrackerComponent implements OnInit {
       var end = this.addMinutes(this.getSessionTime(this.tickets[index].people));
       this.tickets[index].sessionEnd = end;
       this.tickets = this.tickets.map(obj => obj);
+      this.setSuccessMessage(`Ticket ${number}'s (${colour}) session has been started`)
+    } else {
+      this.setErrorMessage(`Ticket ${number}'s (${colour}) session has failed to start`)
     }
   }
 
@@ -243,6 +264,7 @@ export class TicketTrackerComponent implements OnInit {
     this.sessionStart(0, colour);
     this.editPeople(0, colour, people);
     colour === 'blue' ? this.queueBluePeopleQuickVar=null : this.queuePurplePeopleQuickVar=null
+    this.setSuccessMessage(`Customer's quick session (${colour}) has been started`)
   }
 
   editPeople(number:number, colour: string, people: number) {
@@ -250,6 +272,9 @@ export class TicketTrackerComponent implements OnInit {
     if (index !== -1) {
       this.tickets[index].people = people;
       this.tickets = this.tickets.map(obj => obj);
+      this.setSuccessMessage(`Ticket ${number}'s (${colour}) people has been changed to ${people}`)
+    } else {
+      this.setErrorMessage(`Ticket ${number}'s (${colour}) people failed to change to ${people}`)
     }
   }
 
@@ -258,7 +283,10 @@ export class TicketTrackerComponent implements OnInit {
     if (index !== -1) {
       this.tickets[index].sessionEnd = this.addMinutes(minutes)
       this.tickets = this.tickets.map(obj => obj);
-    }
+      this.setSuccessMessage(`Ticket ${number}'s (${colour}) session end changed to ${this.get24HourTime(this.tickets[index].sessionEnd)}`)
+    } else {
+      this.setErrorMessage(`Ticket ${number}'s (${colour}) session end failed to change to ${this.get24HourTime(this.tickets[index].sessionEnd)}`)
+    } 
   }
 
   get24HourTime(date?:Date): string {
@@ -275,6 +303,7 @@ export class TicketTrackerComponent implements OnInit {
       this.tickets[index].status = 'inactive';
       this.tickets[index].people = 0;
       this.tickets[index].queueStart = null;
+      this.tickets[index].promisedStart = null;
       this.tickets[index].sessionStart = null;
       this.tickets[index].sessionEnd = null;
       if (number===0) {
@@ -285,6 +314,9 @@ export class TicketTrackerComponent implements OnInit {
         this.tickets[index].order = this.unhidden[colour];
       }
       this.tickets = this.tickets.map(obj => obj);
+      this.setSuccessMessage(`Ticket ${number} successfully dequeued`)
+    } else {
+      this.setErrorMessage(`Ticket ${number} failed to dequeue`)
     }
   }
 

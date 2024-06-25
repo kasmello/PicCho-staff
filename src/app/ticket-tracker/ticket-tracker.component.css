@@ -1,11 +1,7 @@
 .ticket-management-wrapper {
 
     display:block;
-    height:95%;
-}
-
-.ticket-header {
-    height: 5%;
+    height:92%;
 }
 
 .ticket-sub-wrapper {
@@ -25,7 +21,7 @@
 }
 
 .queue {
-    width: 51%
+    width: 53%
     
 }
 
@@ -34,7 +30,7 @@
 }
 
 .active {
-    width: 23%;
+    width: 21%;
 }
 
 .blue .active {
@@ -59,7 +55,7 @@
 
 
 .ticket-box .ticket-list {
-    width: 40%;
+    width: 45%;
     /* margin: 10px; */
     /* padding: 10px; */
 }
@@ -84,19 +80,68 @@ table thead {
     width: 100%
 }
 
-.inactive-table td button {
+.blue button.positive, .purple button.positive {
+    background-color: rgb(18, 164, 38);
+}
+
+.blue button.positive:hover, .purple button.positive:hover {
+    background-color: rgb(43, 183, 62);
+}
+
+.blue button.negative, .purple button.negative {
+    background-color: rgb(164, 18, 18);
+}
+
+.blue button.negative:hover, .purple button.negative:hover {
+    background-color: rgb(195, 43, 43);
+}
+
+.blue button {
     padding: 5px 10px;
     border: none;
     border-radius: 4px;
-    background-color: #9f4bca;
+    background-color: #4b64ca;
     color: white;
     cursor: pointer;
     box-sizing: border-box;
 }
 
-.inactive-table td button:hover {
-    background-color: #c577ec;
+.purple button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #cb2ed7;
+    color: white;
+    cursor: pointer;
+    box-sizing: border-box;
 }
+
+.blue button:hover {
+    background-color: #637bd9;
+}
+
+
+.purple button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #cb2ed7;
+    color: white;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.purple button:hover {
+    background-color: #dd65e6;
+}
+
+button:disabled {
+    background-color: #ccc; /* Gray background */
+    color: #666; /* Dark gray text */
+    cursor: not-allowed; /* Change cursor to indicate disabled state */
+    opacity: 0.4; /* Reduce opacity */
+}
+
 
 input {
     width: 40px;
@@ -105,7 +150,7 @@ input {
 
 
 .ticket-box .inputs {
-    width: 60%;
+    width: 55%;
 }
 
 .ticket-list {
@@ -121,14 +166,26 @@ input {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 4%;
     padding: 0 10px; /* Padding on both left and right */
     box-sizing: border-box;
+}
+
+.rectangle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4%;
+    padding: 0 7% 0 8%; /* Padding on both left and right */
+    box-sizing: border-box;
+    font-size:20px;
+    font-family: 'Manjari-Bold';
 }
 
 .left-content {
     display: flex;
     align-items: center;
-    gap: 20px; /* Space between the left-aligned items */
+    gap: 50px; /* Space between the left-aligned items */
 }
 
 .ticket-header button {
@@ -149,11 +206,16 @@ input {
     overflow-x: scroll;
 }
 
-
-
-
 .inactive.ticket-box {
     display: flex;
     flex-direction: row;
+}
+
+.error {
+    color:rgb(195, 43, 43)
+}
+
+.success {
+    color:rgb(18, 164, 38)
 }
 
