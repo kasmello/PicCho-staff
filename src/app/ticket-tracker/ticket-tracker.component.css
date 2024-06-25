@@ -1,0 +1,59 @@
+.ticket-management-wrapper {
+
+    display:block;
+    height:95%;
+}
+
+.ticket-header {
+    height: 5%;
+}
+
+.ticket-sub-wrapper {
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.blue {
+    background-color: rgba(90, 146, 237,0.3);
+}
+
+.purple {
+    background-color: rgba(214, 138, 255,0.3);
+}
+
+.queue {
+    width: 51%
+}
+
+.inactive {
+    width: 23%;
+}
+
+.active {
+    width: 23%;
+}
+
+.blue .active {
+    background-color: rgba(90, 146, 237,1);
+}
+
+.purple .active {
+    background-color: rgba(214, 138, 255,1);
+}
+
+.ticket-box {
+    height: 96%;
+    background-color: white;
+    border-color: #3b336586;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.inactive.ticket-box {
+    display: flex;
+    flex-direction: row;
+}
+

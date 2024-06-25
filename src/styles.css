@@ -1,0 +1,64 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'Odin';
+    src: url('/assets/fonts/Odin\ Rounded\ -\ Bold.otf') format('opentype');
+    font-weight: normal;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: 'Kind Sans';
+    src: url('/assets/fonts/Kind\ Sans\ Thin.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Goli';
+    src: url('/assets/fonts/Goli-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Goli Bold';
+    src: url('/assets/fonts/Goli-SemiBold.otf') format('opentype');
+    font-weight: normal;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: 'Manjari';
+    src: url('/assets/fonts/Manjari-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Manjari Bold';
+    src: url('/assets/fonts/Manjari-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: bold;
+}
+html {
+    background-color: rgba(188, 173, 255, 0.6);
+}
+
+
+
+
+
+a{
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 1250px) {
+
+
+}
+
+@media only screen and (max-width: 740px) {
+
+
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: "Manjari"; }
