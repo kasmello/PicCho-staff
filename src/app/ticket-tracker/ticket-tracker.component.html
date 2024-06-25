@@ -45,9 +45,9 @@
                     <th>No.</th>
                     <th>People</th>
                     <th>Queued</th>
-                    <th>Session</th>
-                    <th>Waiting</th>
-                    <th>Est. Time Left</th>
+                    <th>Session (mins)</th>
+                    <th>Waiting (mins)</th>
+                    <th>Est. Time Left (mins)</th>
                     <th>Est. Start</th>
                 </thead>
                 <tbody class="queue-table" *ngFor="let item of tickets | filterTickets:queueBlueFilter">
@@ -58,10 +58,10 @@
                         (blur)="resetInput($event, item.people)"></td>
                     <td>{{get24HourTime(item.queueStart)}}</td>
                     <td>{{getSessionTime(item.people)}}</td>
-                    <td>{{getMinuteDifference(null,item.sessionStart)}}</td>
+                    <td>{{getMinuteDifference(null,item.queueStart)}}</td>
                     <td>{{getEstimatedWaitTime(item.number, item.colour)}}</td>
                     <td>{{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
-                    <td><button (click)="sessionStart(item.number,item.colour)">Start</button></td>
+                    <td><button (click)="sessionStart(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activeBlueFilter).length>0">Start</button></td>
                     <td><button (click)="dequeueTicket(item.number,item.colour)">Dequeue</button></td>
 
                 </tbody>
@@ -85,7 +85,7 @@
                 <p>Quick Start with <input #queueBluePeopleQuick [(ngModel)]="queueBluePeopleQuickVar" type="number" min=1 max=8 placeholder="1-8" 
                     (keydown.enter)="checkToProceed(queueBluePeopleQuickVar,1,8, 'No. people for blue ticket'); !errorMessage ? quickSessionStart('blue', queueBluePeopleQuickVar) : null"> People</p>
                 <button (click)="checkToProceed(queueBluePeopleQuickVar,1,8,'No. people for blue ticket'); !errorMessage ? quickSessionStart('blue', queueBluePeopleQuickVar) : null" [disabled]="!queueBluePeopleQuickVar">Start</button>
-                <p *ngIf="queueBluePeopleQuickVar">{{getSessionTime(queueBluePeopleQuickVar)}} min session:<br>
+                <p *ngIf="queueBluePeopleQuickVar<1||queueBluePeopleQuickVar>8">{{getSessionTime(queueBluePeopleQuickVar)}} min session:<br>
                     {{get24HourTime()}} - 
                     {{get24HourTime(addMinutes(getSessionTime(queueBluePeopleQuickVar)))}}</p>
             </ng-template>
@@ -134,9 +134,9 @@
                     <th>No.</th>
                     <th>People</th>
                     <th>Queued</th>
-                    <th>Session</th>
-                    <th>Waiting</th>
-                    <th>Est. Time Left</th>
+                    <th>Session (mins)</th>
+                    <th>Waiting (mins)</th>
+                    <th>Est. Time Left (mins)</th>
                     <th>Est. Start</th>
                 </thead>
                 <tbody class="queue-table" *ngFor="let item of tickets | filterTickets:queuePurpleFilter">
@@ -147,10 +147,10 @@
                         (blur)="resetInput($event, item.people)"></td>
                     <td>{{get24HourTime(item.queueStart)}}</td>
                     <td>{{getSessionTime(item.people)}}</td>
-                    <td>{{getMinuteDifference(null,item.sessionStart)}}</td>
+                    <td>{{getMinuteDifference(null,item.queueStart)}}</td>
                     <td>{{getEstimatedWaitTime(item.number, item.colour)}}</td>
                     <td>{{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
-                    <td><button (click)="sessionStart(item.number,item.colour)">Start Session</button></td>
+                    <td><button (click)="sessionStart(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activePurpleFilter).length>0">Start</button></td>
                     <td><button (click)="dequeueTicket(item.number,item.colour)">Dequeue</button></td>
 
                 </tbody>
@@ -174,7 +174,7 @@
                     <p>Quick Start with <input #queuePurplePeopleQuick [(ngModel)]="queuePurplePeopleQuickVar" type="number" min=1 max=8 placeholder="1-8" 
                         (keydown.enter)="checkToProceed(queuePurplePeopleQuickVar,1,8, 'No. people for purple ticket'); !errorMessage ? quickSessionStart('purple', queuePurplePeopleQuickVar) : null"> People</p>
                     <button (click)="checkToProceed(queuePurplePeopleQuickVar,1,8, 'No. people for purple ticket'); !errorMessage ? quickSessionStart('purple', queuePurplePeopleQuickVar) : null" [disabled]="!queuePurplePeopleQuickVar">Start</button>
-                    <p *ngIf="queuePurplePeopleQuickVar">{{getSessionTime(queuePurplePeopleQuickVar)}} min session:<br>
+                    <p *ngIf="queuePurplePeopleQuickVar<1||queuePurplePeopleQuickVar>8">{{getSessionTime(queuePurplePeopleQuickVar)}} min session:<br>
                         {{get24HourTime()}} - 
                         {{get24HourTime(addMinutes(getSessionTime(queuePurplePeopleQuickVar)))}}</p>
                 </ng-template>
