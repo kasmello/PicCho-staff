@@ -13,10 +13,24 @@ export class TicketTrackerComponent implements OnInit {
   inactivePurplePeopleVar: number;
   queueBluePeopleQuickVar: number;
   queuePurplePeopleQuickVar: number;
+  blueBlink: boolean = false;
+  purpleBlink: boolean = false;
   marginConstant = 2
   invalid = false;
   errorMessage: string = '';
   successMessage: string = '';
+
+  updateBlinkWrapper(sessionEnd: Date, colour: string) {
+    var time = this.getMinuteDifference(sessionEnd);
+    if (time===0) {
+      colour==='blue' ? this.blueBlink = true : this.purpleBlink = true;
+    }
+    return time
+  }
+
+  resetBlink(colour: string) {
+    colour === 'blue' ? this.blueBlink = false : this.purpleBlink = false;
+  }
 
   shuffleDown(colour: string, order: number) {
     this.tickets = this.tickets.map(obj => {
@@ -128,7 +142,7 @@ export class TicketTrackerComponent implements OnInit {
 
   checkToProceed(value: number, min: number, max: number) {
     this.errorMessage='';
-    if (!value) {
+    if (value === null) {
       this.setErrorMessage('ERROR: You must enter a number')
     } else if (value < min || value > max) {
       this.setErrorMessage(`ERROR: Number must be in between ${min} and ${max}`)
@@ -210,7 +224,7 @@ export class TicketTrackerComponent implements OnInit {
   getMinuteDifference(end?: Date, start?: Date) {
     !start ? start = new Date() : null;
     !end ? end = new Date() : null;
-    const diffInMilliseconds = end.getTime() - start.getTime();
+    const diffInMilliseconds = Math.max(end.getTime() - start.getTime(),0);
     const diffInMinutes = Math.ceil(diffInMilliseconds / (1000 * 60));
     return diffInMinutes;
   }

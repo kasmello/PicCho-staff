@@ -215,7 +215,45 @@ input {
     color:rgb(195, 43, 43)
 }
 
+.late {
+    background-color: #871717;
+    color: #ffffff;
+}
+
+.early {
+    background-color: #178749;
+    color: #ffffff;
+}
+
 .success {
     color:rgb(18, 164, 38)
 }
+
+@keyframes blue-blink {
+    0%, 100% {
+        background-color: rgba(90, 146, 237, 1);
+    }
+    50% {
+        background-color: white;
+    }
+}
+
+@keyframes purple-blink {
+    0%, 100% {
+        background-color: rgba(214, 138, 255,1);
+    }
+    50% {
+        background-color: white;
+    }
+}
+  
+
+.blue-blink {
+    animation: blue-blink 1s infinite;
+}
+
+.purple-blink {
+    animation: purple-blink 1s infinite;
+}
+
 

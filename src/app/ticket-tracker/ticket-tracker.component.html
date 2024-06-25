@@ -68,25 +68,28 @@
                     <td>{{getSessionTime(item.people)}}</td>
                     <td>{{getEstimatedWaitTime(item.number, item.colour)}}</td>
                     <td>{{get24HourTime(item.promisedStart)}}</td>
-                    <td>{{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
+                    <td [ngClass]="{'late': get24HourTime(item.promisedStart)<get24HourTime(getEstimatedStartTime(item.number, item.colour)),
+                        'early': get24HourTime(item.promisedStart)>get24HourTime(getEstimatedStartTime(item.number, item.colour))
+                    }">
+                        {{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
                     <td><button (click)="sessionStart(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activeBlueFilter).length>0" class="positive">Start</button></td>
                     <td><button (click)="dequeueTicket(item.number,item.colour)" class="negative">X</button></td>
 
                 </tbody>
             </table>
         </div>
-        <div class="active ticket-box">
+        <div class="active ticket-box" [ngClass]="{'blue-blink': blueBlink}">
             <div *ngIf="(tickets | filterTickets:activeBlueFilter).length; else noItemsBlue">
             <div class="active-table" *ngFor="let item of tickets | filterTickets:activeBlueFilter">
                 <h1>Ticket {{ item.number }}</h1>
                 <h3>{{item.people}} People</h3>
                 <h3>Session started at {{get24HourTime(item.sessionStart)}}</h3>
-                <h3>Session ends in <input #sessionEndingBlue type="number" placeholder="1-60" min = 0 max = 60
-                    value={{getMinuteDifference(item.sessionEnd)}}
+                <h3>Session ends in <input #sessionEndingBlue type="number" placeholder="0-60" min = 0 max = 60 
+                    value={{updateBlinkWrapper(item.sessionEnd,item.colour)}} 
                     (keydown.enter)="checkToProceed(sessionEndingBlue.valueAsNumber,0,60); !errorMessage ? editSessionEnd(item.number,item.colour,sessionEndingBlue.valueAsNumber) : null"
                     (blur)="resetInput($event, getMinuteDifference(item.sessionEnd))"> minutes</h3>
                 <h3>Session ending at {{get24HourTime(item.sessionEnd)}}</h3>
-                <button (click)="dequeueTicket(item.number,item.colour)" class="negative">END SESSION</button>
+                <button (click)="dequeueTicket(item.number,item.colour); resetBlink(item.colour)" class="negative">END SESSION</button>
             </div>
             </div>
             <ng-template #noItemsBlue>
@@ -159,25 +162,26 @@
                     <td>{{getSessionTime(item.people)}}</td>
                     <td>{{getEstimatedWaitTime(item.number, item.colour)}}</td>
                     <td>{{get24HourTime(item.promisedStart)}}</td>
-                    <td>{{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
+                    <td [ngClass]="{'late': get24HourTime(item.promisedStart)<get24HourTime(getEstimatedStartTime(item.number, item.colour))}">
+                        {{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
                     <td><button (click)="sessionStart(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activePurpleFilter).length>0" class="positive">Start</button></td>
                     <td><button (click)="dequeueTicket(item.number,item.colour)" class="negative">X</button></td>
 
                 </tbody>
             </table>
         </div>
-        <div class="active ticket-box">
+        <div class="active ticket-box" [ngClass]="{'purple-blink': purpleBlink}">
             <div *ngIf="(tickets | filterTickets:activePurpleFilter).length; else noItemsPurple">
                 <div class="active-table" *ngFor="let item of tickets | filterTickets:activePurpleFilter">
                     <h1>Ticket {{ item.number }}</h1>
                     <h3>{{item.people}} People</h3>
                     <h3>Session started at {{get24HourTime(item.sessionStart)}}</h3>
                     <h3>Session ends in <input #sessionEndingPurple type="number" placeholder="0-60" min = 0 max = 60
-                        value={{getMinuteDifference(item.sessionEnd)}}
+                        value={{updateBlinkWrapper(item.sessionEnd,item.colour)}}
                         (keydown.enter)="checkToProceed(sessionEndingPurple.valueAsNumber,0,60); !errorMessage ? editSessionEnd(item.number,item.colour,sessionEndingPurple.valueAsNumber) : null"
                         (blur)="resetInput($event, getMinuteDifference(item.sessionEnd))"> minutes</h3>
                     <h3>Session ending at {{get24HourTime(item.sessionEnd)}}</h3>
-                    <button (click)="dequeueTicket(item.number,item.colour)" class="negative">END SESSION</button>
+                    <button (click)="dequeueTicket(item.number,item.colour); resetBlink(item.colour)" class="negative">END SESSION</button>
                 </div>
                 </div>
                 <ng-template #noItemsPurple>
