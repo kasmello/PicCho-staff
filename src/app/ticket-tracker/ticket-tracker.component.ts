@@ -24,12 +24,20 @@ export class TicketTrackerComponent implements OnInit {
     var time = this.getMinuteDifference(sessionEnd);
     if (time===0) {
 
+      
+
       if (colour==='blue') {
-        !this.blueBlink ? alert(`Blue room time limit has been reached!`) : null;
-        this.blueBlink = true
+        if (!this.blueBlink) {
+          this.blueBlink = true
+          alert(`Blue room time limit has been reached!`)
+        } 
+        
       } else {
-        !this.purpleBlink ? alert(`Purple room time limit has been reached!`) : null;
-        this.purpleBlink = true
+        if (!this.purpleBlink) {
+          this.purpleBlink = true
+          alert(`Purple room time limit has been reached!`)
+        }
+        
       }
 
     }

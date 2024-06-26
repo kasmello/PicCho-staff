@@ -63,13 +63,21 @@
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     box-sizing: border-box;
     
 }
 
-table th, table td {
+table td {
     padding: 8px;
+    font-size: 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+table th {
+    padding: 8px;
+    font-size: 15px;
     text-align: center;
     box-sizing: border-box;
 }
@@ -145,6 +153,7 @@ button:disabled {
 
 input {
     width: 40px;
+    font-size: 20px;
 }
 
 
@@ -155,8 +164,8 @@ input {
 
 .ticket-list {
     background-color: rgb(205, 201, 201);
-    overflow-y: scroll;
-    overflow-x: scroll;
+    overflow-y: auto;
+    overflow-x: auto;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 
@@ -202,8 +211,8 @@ input {
 }
 
 .ticket-box {
-    overflow-y: scroll;
-    overflow-x: scroll;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .inactive.ticket-box {
@@ -246,6 +255,33 @@ input {
         background-color: white;
     }
 }
+
+.inputs {
+    margin-top: 40px;
+}
+
+.inputs p {
+    font-size: 19px;
+    
+}
+
+.inputs button, .noActive button {
+    font-size: 18px;
+    width: 40%;
+
+}
+
+.inputs input{
+    font-size: 32px;
+    width: 35%;
+    height: 50px;
+}
+
+.quickstart input {
+    font-size: 32px;
+    width: 24%;
+    height: 30px;
+}
   
 
 .blue-blink {
@@ -254,6 +290,14 @@ input {
 
 .purple-blink {
     animation: purple-blink 1s infinite;
+}
+
+.noActive p {
+    font-size: 18px;
+}
+
+.noActive {
+    margin-top: 100px;
 }
 
 
