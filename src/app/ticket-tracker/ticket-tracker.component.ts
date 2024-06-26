@@ -235,7 +235,9 @@ export class TicketTrackerComponent implements OnInit {
     const smallestOrder = tempArr.reduce((min, obj) => (obj.order < min ? obj.order : min), tempArr[0].order);
     const index = this.tickets.findIndex(item => item.order === smallestOrder && item.colour === colour);
     const name = prompt("What is the customer's name?");
-    if (index !== -1) {
+    if (name === null) {
+      this.setErrorMessage(`Ticket ${this.tickets[index].number} (${colour}) did not queue`)
+    } else if (index !== -1) {
       this.tickets[index].status = 'queue';
       this.tickets[index].people = people;
       this.tickets[index].name = name;
