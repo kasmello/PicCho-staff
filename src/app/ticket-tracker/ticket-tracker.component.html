@@ -4,7 +4,7 @@
         <span *ngIf="errorMessage" class="error">{{ errorMessage }}</span>
         <span *ngIf="successMessage" class="success">{{ successMessage }}</span>
     </div>
-    <button (click)="resetTickets()" [disabled] = "(tickets | filterTickets:inactiveFilter).length!==noTickets">Reset Ticket Order</button>
+    <button (click)="resetTickets()" [disabled] = "(tickets | filterTickets:inactiveFilter).length!==noTickets">Reset Ticket Order/Status</button>
 </div>
 <div class="rectangle-header">
     <span>Inactive Tickets</span>
@@ -52,11 +52,13 @@
                 <thead class="box-header">
                     <th>No.</th>
                     <th>People</th>
-                    <th>Session (mins)</th>
-                    <th>Est. Wait Left (mins)</th>
+                    <th>Session (m)</th>
+                    <th>Time Left (m)</th>
                     <th>Queued</th>
                     <th>Promised Start</th>
                     <th>Est. Start</th>
+                    <th></th>
+                    <th></th>
                 </thead>
                 <tbody class="queue-table" *ngFor="let item of tickets | filterTickets:queueBlueFilter">
                     <td>{{ item.number }}</td>
@@ -71,7 +73,7 @@
                     <td [ngClass]="{'late': getMinuteDifference(getEstimatedStartTime(item.number, item.colour),item.promisedStart)>=3,
                         'early': getMinuteDifference(item.promisedStart,getEstimatedStartTime(item.number, item.colour))>0}">
                         {{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
-                    <td><button (click)="startConfirmationWrapper(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activeBlueFilter).length>0" class="positive">Start</button></td>
+                    <td><button (click)="startConfirmationWrapper(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activeBlueFilter).length>0" class="positive">GO</button></td>
                     <td><button (click)="dequeueConfirmationWrapper(item.number,item.colour)" class="negative">X</button></td>
 
                 </tbody>
@@ -146,11 +148,13 @@
                 <thead class="box-header">
                     <th>No.</th>
                     <th>People</th>
-                    <th>Session (mins)</th>
-                    <th>Est. Time Left (mins)</th>
+                    <th>Session (m)</th>
+                    <th>Time Left (m)</th>
                     <th>Queued</th>
                     <th>Promised Start</th>
                     <th>Est. Start</th>
+                    <th></th>
+                    <th></th>
                 </thead>
                 <tbody class="queue-table" *ngFor="let item of tickets | filterTickets:queuePurpleFilter">
                     <td>{{ item.number }}</td>
@@ -164,7 +168,7 @@
                     <td>{{get24HourTime(item.promisedStart)}}</td>
                     <td [ngClass]="{'late': get24HourTime(item.promisedStart)<get24HourTime(getEstimatedStartTime(item.number, item.colour))}">
                         {{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
-                    <td><button (click)="startConfirmationWrapper(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activePurpleFilter).length>0" class="positive">Start</button></td>
+                    <td><button (click)="startConfirmationWrapper(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activePurpleFilter).length>0" class="positive">GO</button></td>
                     <td><button (click)="dequeueConfirmationWrapper(item.number,item.colour)" class="negative">X</button></td>
 
                 </tbody>
