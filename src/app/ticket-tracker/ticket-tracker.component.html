@@ -51,6 +51,7 @@
             <table>
                 <thead class="box-header">
                     <th>No.</th>
+                    <th>Name</th>
                     <th>People</th>
                     <th>Session (m)</th>
                     <th>Time Left (m)</th>
@@ -62,6 +63,10 @@
                 </thead>
                 <tbody class="queue-table" *ngFor="let item of tickets | filterTickets:queueBlueFilter">
                     <td>{{ item.number }}</td>
+                    <td><input #queueBlueName type="string" placeholder="name" class="nameInput"
+                        value={{item.name}} 
+                        (keydown.enter)="editName(item.number, item.colour, queueBlueName.value)"
+                        (blur)="resetInput($event, item.name)"></td>
                     <td><input #queueBluePeople type="number" min=1 max=8 placeholder="1-8" 
                         value={{item.people}} 
                         (keydown.enter)="checkToProceed(queueBluePeople.valueAsNumber,1,8); !errorMessage ? editPeople(item.number, item.colour, queueBluePeople.valueAsNumber) : null"
@@ -82,7 +87,7 @@
         <div class="active ticket-box" [ngClass]="{'blue-blink': blueBlink}">
             <div *ngIf="(tickets | filterTickets:activeBlueFilter).length; else noItemsBlue">
             <div class="active-table" *ngFor="let item of tickets | filterTickets:activeBlueFilter">
-                <h1>Ticket {{ item.number }}</h1>
+                <h1>Ticket {{ item.number }} ({{ item.name }})</h1>
                 <h3>{{item.people}} People</h3>
                 <h3>Session started at {{get24HourTime(item.sessionStart)}}</h3>
                 <h3>Session ends in <input #sessionEndingBlue type="number" placeholder="0-60" min = 0 max = 60 
@@ -147,6 +152,7 @@
             <table>
                 <thead class="box-header">
                     <th>No.</th>
+                    <th>Name</th>
                     <th>People</th>
                     <th>Session (m)</th>
                     <th>Time Left (m)</th>
@@ -158,6 +164,10 @@
                 </thead>
                 <tbody class="queue-table" *ngFor="let item of tickets | filterTickets:queuePurpleFilter">
                     <td>{{ item.number }}</td>
+                    <td><input #queuePurpleName type="string" placeholder="name" class="nameInput" 
+                        value={{item.name}} 
+                        (keydown.enter)="editName(item.number, item.colour, queuePurpleName.value)"
+                        (blur)="resetInput($event, item.name)"></td>
                     <td><input #queuePurplePeople type="number" min=1 max=8 placeholder="1-8" 
                         value={{item.people}} 
                         (keydown.enter)="checkToProceed(queuePurplePeople.valueAsNumber,1,8); !errorMessage ? editPeople(item.number, item.colour, queuePurplePeople.valueAsNumber) : null"
@@ -177,7 +187,7 @@
         <div class="active ticket-box" [ngClass]="{'purple-blink': purpleBlink}">
             <div *ngIf="(tickets | filterTickets:activePurpleFilter).length; else noItemsPurple">
                 <div class="active-table" *ngFor="let item of tickets | filterTickets:activePurpleFilter">
-                    <h1>Ticket {{ item.number }}</h1>
+                    <h1>Ticket {{ item.number }} ({{ item.name }})</h1>
                     <h3>{{item.people}} People</h3>
                     <h3>Session started at {{get24HourTime(item.sessionStart)}}</h3>
                     <h3>Session ends in <input #sessionEndingPurple type="number" placeholder="0-60" min = 0 max = 60

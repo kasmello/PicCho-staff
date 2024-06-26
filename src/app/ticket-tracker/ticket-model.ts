@@ -1,5 +1,6 @@
 export interface TicketItem {
     number: number;
+    name : string | null;
     order: number;
     colour: string;
     status: string;
