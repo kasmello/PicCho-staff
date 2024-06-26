@@ -284,9 +284,9 @@ export class TicketTrackerComponent implements OnInit {
 
   quickSessionStart(colour: string, people: number) {
     this.sessionStart(0, colour);
-    this.editPeople(0, colour, people);
+    this.editSessionEnd(0, colour, this.getSessionTime(people));
     colour === 'blue' ? this.queueBluePeopleQuickVar=null : this.queuePurplePeopleQuickVar=null
-    this.setSuccessMessage(`Customer's quick session (${colour}) has been started`)
+    this.setSuccessMessage(`Customer's quick session (${colour}) has been started with ${people} people`)
   }
 
   editPeople(number:number, colour: string, people: number) {
