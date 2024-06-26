@@ -4,7 +4,7 @@
         <span class="error">{{ errorMessage }}</span>
         <span class="success">{{ successMessage }}</span>
     </div>
-    <button (click)="resetTickets()">Reset Tickets</button>
+    <button (click)="resetTickets()" [disabled] = "(tickets | filterTickets:inactiveFilter).length!==noTickets">Reset Ticket Order</button>
 </div>
 <div class="rectangle-header">
     <span>Inactive Tickets</span>
@@ -68,7 +68,7 @@
                     <td>{{getSessionTime(item.people)}}</td>
                     <td>{{getEstimatedWaitTime(item.number, item.colour)}}</td>
                     <td>{{get24HourTime(item.promisedStart)}}</td>
-                    <td [ngClass]="{'late': getMinuteDifference(getEstimatedStartTime(item.number, item.colour),item.promisedStart)>=5,
+                    <td [ngClass]="{'late': getMinuteDifference(getEstimatedStartTime(item.number, item.colour),item.promisedStart)>=3,
                         'early': getMinuteDifference(item.promisedStart,getEstimatedStartTime(item.number, item.colour))>0}">
                         {{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
                     <td><button (click)="sessionStart(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activeBlueFilter).length>0" class="positive">Start</button></td>

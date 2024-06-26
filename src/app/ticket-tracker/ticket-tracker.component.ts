@@ -17,14 +17,13 @@ export class TicketTrackerComponent implements OnInit {
   purpleBlink: boolean = false;
   marginConstant = 2
   invalid = false;
+  noTickets = 26;
   errorMessage: string = '';
   successMessage: string = '';
 
   updateBlinkWrapper(sessionEnd: Date, colour: string) {
     var time = this.getMinuteDifference(sessionEnd);
     if (time===0) {
-
-      
 
       if (colour==='blue') {
         if (!this.blueBlink) {
@@ -89,6 +88,10 @@ export class TicketTrackerComponent implements OnInit {
     ]
     this.setSuccessMessage('All tickets have been reset')
   }
+
+  inactiveFilter = {
+    status: 'inactive'
+  };
 
   inactiveBlueFilter = {
     status: 'inactive',
@@ -241,7 +244,7 @@ export class TicketTrackerComponent implements OnInit {
     !start ? start = new Date() : null;
     !end ? end = new Date() : null;
     const diffInMilliseconds = Math.max(end.getTime() - start.getTime(),0);
-    const diffInMinutes = Math.ceil(diffInMilliseconds / (1000 * 60));
+    const diffInMinutes = Math.round(diffInMilliseconds / (1000 * 60));
     return diffInMinutes;
   }
 

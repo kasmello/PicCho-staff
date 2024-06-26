@@ -9,12 +9,12 @@ export class FilterTicketsPipe implements PipeTransform {
     if (!items) {
       return [];
     }
-
+    console.log(filters.colour)
     return items.filter(item => {
-      const matchesStatus = item.status === filters.status;
-      const matchesColour = item.colour === filters.colour;
-      const matchesNumber = filters.zeroFilter ? item.number !== 0 : true;
-      const matchesHidden = filters.hiddenFilter ? !item.hide : item.hide;
+      const matchesStatus = filters.status!==undefined ? item.status === filters.status : true;
+      const matchesColour = filters.colour!==undefined ? item.colour === filters.colour: true;
+      const matchesNumber = filters.zeroFilter!==undefined ? filters.zeroFilter ? (item.number !== 0) : true : true;
+      const matchesHidden = filters.hiddenFilter!==undefined ? !item.hide===filters.hiddenFilter : true;
 
       return matchesStatus && matchesColour && matchesNumber && matchesHidden;
     }).sort((a, b) => a.order - b.order);;

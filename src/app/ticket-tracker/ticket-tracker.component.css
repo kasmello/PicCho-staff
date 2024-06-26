@@ -156,6 +156,10 @@ input {
     font-size: 20px;
 }
 
+.active-table input {
+    width: 50px;
+    height: 40px;
+}
 
 
 .ticket-box .inputs {
