@@ -23,7 +23,15 @@ export class TicketTrackerComponent implements OnInit {
   updateBlinkWrapper(sessionEnd: Date, colour: string) {
     var time = this.getMinuteDifference(sessionEnd);
     if (time===0) {
-      colour==='blue' ? this.blueBlink = true : this.purpleBlink = true;
+
+      if (colour==='blue') {
+        !this.blueBlink ? alert(`Blue room time limit has been reached!`) : null;
+        this.blueBlink = true
+      } else {
+        !this.purpleBlink ? alert(`Purple room time limit has been reached!`) : null;
+        this.purpleBlink = true
+      }
+
     }
     return time
   }
