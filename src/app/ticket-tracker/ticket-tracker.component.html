@@ -1,8 +1,8 @@
 <div class="ticket-header">
     <div class="left-content">
         <span>PicCho Ticket Management System</span>
-        <span class="error">{{ errorMessage }}</span>
-        <span class="success">{{ successMessage }}</span>
+        <span *ngIf="errorMessage" class="error">{{ errorMessage }}</span>
+        <span *ngIf="successMessage" class="success">{{ successMessage }}</span>
     </div>
     <button (click)="resetTickets()" [disabled] = "(tickets | filterTickets:inactiveFilter).length!==noTickets">Reset Ticket Order</button>
 </div>
@@ -93,7 +93,7 @@
             </div>
             <ng-template #noItemsBlue>
                 <div class="noActive">
-                <p class="quickstart">QuickStart without a ticket with<br><input #queueBluePeopleQuick [(ngModel)]="queueBluePeopleQuickVar" type="number" min=1 max=8 placeholder="1-8" 
+                <p class="quickstart">QuickStart without a ticket for<br><input #queueBluePeopleQuick [(ngModel)]="queueBluePeopleQuickVar" type="number" min=1 max=8 placeholder="1-8" 
                     (keydown.enter)="checkToProceed(queueBluePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('blue', queueBluePeopleQuickVar) : null"> People</p>
                 <button (click)="checkToProceed(queueBluePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('blue', queueBluePeopleQuickVar) : null" [disabled]="!queueBluePeopleQuickVar">Start</button>
                 <p *ngIf="queueBluePeopleQuickVar>0&&queueBluePeopleQuickVar<9">{{getSessionTime(queueBluePeopleQuickVar)}} min session:<br>
@@ -186,7 +186,7 @@
                 </div>
                 <ng-template #noItemsPurple>
                     <div class="noActive">
-                    <p class="quickstart">QuickStart without a ticket with<br><input #queuePurplePeopleQuick [(ngModel)]="queuePurplePeopleQuickVar" type="number" min=1 max=8 placeholder="1-8" 
+                    <p class="quickstart">QuickStart without a ticket for<br><input #queuePurplePeopleQuick [(ngModel)]="queuePurplePeopleQuickVar" type="number" min=1 max=8 placeholder="1-8" 
                         (keydown.enter)="checkToProceed(queuePurplePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('purple', queuePurplePeopleQuickVar) : null"> People</p>
                     <button (click)="checkToProceed(queuePurplePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('purple', queuePurplePeopleQuickVar) : null" [disabled]="!queuePurplePeopleQuickVar">Start</button>
                     <p *ngIf="queuePurplePeopleQuickVar>0&&queuePurplePeopleQuickVar<9">{{getSessionTime(queuePurplePeopleQuickVar)}} min session:<br>

@@ -225,7 +225,11 @@ input {
 }
 
 .error {
-    color:rgb(195, 43, 43)
+    background-color:rgb(195, 43, 43);
+    color: #ffffff;
+    padding: 3px 5px;
+    border-radius: 5px;
+    
 }
 
 .late {
@@ -239,7 +243,10 @@ input {
 }
 
 .success {
-    color:rgb(18, 164, 38)
+    background-color:rgb(18, 164, 38);
+    color: #ffffff;
+    padding: 3px 5px ;
+    border-radius: 5px;
 }
 
 @keyframes blue-blink {

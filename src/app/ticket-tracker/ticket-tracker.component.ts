@@ -43,6 +43,7 @@ export class TicketTrackerComponent implements OnInit {
         
       }
     } else {
+      this.resetBlink(colour);
       this.documentTitle = 'PicCho Ticket Manager'
     }
     this.titleService.setTitle(this.documentTitle);
@@ -57,6 +58,9 @@ export class TicketTrackerComponent implements OnInit {
     var input = confirm(`DOUBLE CHECK: Do you want to start the session for Ticket ${number} ${colour}?`)
     if (input) {
       this.sessionStart(number, colour);
+      if ('Notification' in window) {
+        Notification.requestPermission();
+      }
       return true
     } else {
       this.setErrorMessage('Start cancelled')
@@ -411,9 +415,6 @@ export class TicketTrackerComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetTickets();
-    if ('Notification' in window) {
-      Notification.requestPermission();
-    }
     setInterval(()=> { this.tickets = this.tickets.map(obj => obj)}, 1000);
     // this.toggleHideTicket(3,"purple");
     // this.toggleHideTicket(5,"purple");
