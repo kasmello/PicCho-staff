@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketItem } from './ticket-model';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-ticket-tracker',
@@ -20,31 +21,60 @@ export class TicketTrackerComponent implements OnInit {
   noTickets = 26;
   errorMessage: string = '';
   successMessage: string = '';
+  documentTitle = 'PicCho Ticket Manager'
 
   updateBlinkWrapper(sessionEnd: Date, colour: string) {
     var time = this.getMinuteDifference(sessionEnd);
     if (time===0) {
 
       if (colour==='blue') {
+        this.documentTitle='🔵⚪'
         if (!this.blueBlink) {
           this.blueBlink = true
-          alert(`Blue room time limit has been reached!`)
+          this.sendNotification(`Blue room time limit has been reached!`)
         } 
         
       } else {
+        this.documentTitle='🟣⚪' 
         if (!this.purpleBlink) {
           this.purpleBlink = true
-          alert(`Purple room time limit has been reached!`)
+          this.sendNotification(`Purple room time limit has been reached!`)
         }
         
       }
-
+    } else {
+      this.documentTitle = 'PicCho Ticket Manager'
     }
+    this.titleService.setTitle(this.documentTitle);
     return time
   }
 
   resetBlink(colour: string) {
     colour === 'blue' ? this.blueBlink = false : this.purpleBlink = false;
+  }
+
+  startConfirmationWrapper(number: number, colour: string) {
+    var input = confirm(`DOUBLE CHECK: Do you want to start the session for Ticket ${number} ${colour}?`)
+    if (input) {
+      this.sessionStart(number, colour);
+      return true
+    } else {
+      this.setErrorMessage('Start cancelled')
+      return false
+    }
+  }
+
+  dequeueConfirmationWrapper(number: number, colour: string) {
+    var input = confirm(`DOUBLE CHECK: Do you want to dequeue Ticket ${number} ${colour}?`)
+    if (input) {
+      this.documentTitle = 'PicCho Ticket Manager'
+      this.titleService.setTitle(this.documentTitle);
+      this.dequeueTicket(number, colour);
+      return true
+    } else {
+      this.setErrorMessage('Dequeue cancelled')
+      return false
+    }
   }
 
   shuffleDown(colour: string, order: number) {
@@ -161,12 +191,11 @@ export class TicketTrackerComponent implements OnInit {
 
   checkToProceed(value: number, min: number, max: number) {
     this.errorMessage='';
-    if (value === null) {
+    if (isNaN(value)) {
       this.setErrorMessage('ERROR: You must enter a number')
     } else if (value < min || value > max) {
       this.setErrorMessage(`ERROR: Number must be in between ${min} and ${max}`)
     }
-
   }
 
   toggleHideTicket(number:number, colour: string) {
@@ -294,11 +323,13 @@ export class TicketTrackerComponent implements OnInit {
   }
 
   quickSessionStart(colour: string, people: number) {
-    this.sessionStart(0, colour);
-    this.editPeople(0,colour,people)
-    this.editSessionEnd(0, colour, this.getSessionTime(people));
-    colour === 'blue' ? this.queueBluePeopleQuickVar=null : this.queuePurplePeopleQuickVar=null
-    this.setSuccessMessage(`Customer's quick session (${colour}) has been started with ${people} people`)
+    if (this.startConfirmationWrapper(0, colour)) {
+      this.editPeople(0,colour,people)
+      this.editSessionEnd(0, colour, this.getSessionTime(people));
+      colour === 'blue' ? this.queueBluePeopleQuickVar=null : this.queuePurplePeopleQuickVar=null
+      this.setSuccessMessage(`Customer's quick session (${colour}) has been started with ${people} people`)
+    }
+    
   }
 
   editPeople(number:number, colour: string, people: number) {
@@ -354,13 +385,35 @@ export class TicketTrackerComponent implements OnInit {
     }
   }
 
-  constructor() { 
+  constructor(private titleService: Title) { 
     
+  }
+
+  sendNotification(notiString: string) {
+    if (Notification.permission === 'granted') {
+      const notification = new Notification('PICCHO ALERT', {
+        body: notiString,
+        requireInteraction: true,
+        icon: "/assets/icons/192x192.png"
+        // Add more properties here if needed
+      });
+      // You can also add event listeners to the notification
+      notification.onclick = () => {
+        window.focus();
+        notification.close();
+      };
+      this.setSuccessMessage(notiString)
+    } else {
+      alert(`${notiString}\nPlease enable notifications to not miss the timer`);
+    }
   }
 
 
   ngOnInit(): void {
     this.resetTickets();
+    if ('Notification' in window) {
+      Notification.requestPermission();
+    }
     setInterval(()=> { this.tickets = this.tickets.map(obj => obj)}, 1000);
     // this.toggleHideTicket(3,"purple");
     // this.toggleHideTicket(5,"purple");

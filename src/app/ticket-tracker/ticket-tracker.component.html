@@ -52,9 +52,9 @@
                 <thead class="box-header">
                     <th>No.</th>
                     <th>People</th>
-                    <th>Queued</th>
                     <th>Session (mins)</th>
                     <th>Est. Wait Left (mins)</th>
+                    <th>Queued</th>
                     <th>Promised Start</th>
                     <th>Est. Start</th>
                 </thead>
@@ -64,15 +64,15 @@
                         value={{item.people}} 
                         (keydown.enter)="checkToProceed(queueBluePeople.valueAsNumber,1,8); !errorMessage ? editPeople(item.number, item.colour, queueBluePeople.valueAsNumber) : null"
                         (blur)="resetInput($event, item.people)"></td>
-                    <td>{{get24HourTime(item.queueStart)}}</td>
                     <td>{{getSessionTime(item.people)}}</td>
                     <td>{{getEstimatedWaitTime(item.number, item.colour)}}</td>
+                    <td>{{get24HourTime(item.queueStart)}}</td>
                     <td>{{get24HourTime(item.promisedStart)}}</td>
                     <td [ngClass]="{'late': getMinuteDifference(getEstimatedStartTime(item.number, item.colour),item.promisedStart)>=3,
                         'early': getMinuteDifference(item.promisedStart,getEstimatedStartTime(item.number, item.colour))>0}">
                         {{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
-                    <td><button (click)="sessionStart(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activeBlueFilter).length>0" class="positive">Start</button></td>
-                    <td><button (click)="dequeueTicket(item.number,item.colour)" class="negative">X</button></td>
+                    <td><button (click)="startConfirmationWrapper(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activeBlueFilter).length>0" class="positive">Start</button></td>
+                    <td><button (click)="dequeueConfirmationWrapper(item.number,item.colour)" class="negative">X</button></td>
 
                 </tbody>
             </table>
@@ -88,7 +88,7 @@
                     (keydown.enter)="checkToProceed(sessionEndingBlue.valueAsNumber,0,60); !errorMessage ? editSessionEnd(item.number,item.colour,sessionEndingBlue.valueAsNumber) : null"
                     (blur)="resetInput($event, getMinuteDifference(item.sessionEnd))"> minutes</h3>
                 <h3>Session ending at {{get24HourTime(item.sessionEnd)}}</h3>
-                <button (click)="dequeueTicket(item.number,item.colour); resetBlink(item.colour)" class="negative">END SESSION</button>
+                <button (click)="dequeueConfirmationWrapper(item.number,item.colour); resetBlink(item.colour)" class="negative">END SESSION</button>
             </div>
             </div>
             <ng-template #noItemsBlue>
@@ -146,9 +146,9 @@
                 <thead class="box-header">
                     <th>No.</th>
                     <th>People</th>
-                    <th>Queued</th>
                     <th>Session (mins)</th>
                     <th>Est. Time Left (mins)</th>
+                    <th>Queued</th>
                     <th>Promised Start</th>
                     <th>Est. Start</th>
                 </thead>
@@ -158,14 +158,14 @@
                         value={{item.people}} 
                         (keydown.enter)="checkToProceed(queuePurplePeople.valueAsNumber,1,8); !errorMessage ? editPeople(item.number, item.colour, queuePurplePeople.valueAsNumber) : null"
                         (blur)="resetInput($event, item.people)"></td>
-                    <td>{{get24HourTime(item.queueStart)}}</td>
                     <td>{{getSessionTime(item.people)}}</td>
                     <td>{{getEstimatedWaitTime(item.number, item.colour)}}</td>
+                    <td>{{get24HourTime(item.queueStart)}}</td>
                     <td>{{get24HourTime(item.promisedStart)}}</td>
                     <td [ngClass]="{'late': get24HourTime(item.promisedStart)<get24HourTime(getEstimatedStartTime(item.number, item.colour))}">
                         {{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
-                    <td><button (click)="sessionStart(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activePurpleFilter).length>0" class="positive">Start</button></td>
-                    <td><button (click)="dequeueTicket(item.number,item.colour)" class="negative">X</button></td>
+                    <td><button (click)="startConfirmationWrapper(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activePurpleFilter).length>0" class="positive">Start</button></td>
+                    <td><button (click)="dequeueConfirmationWrapper(item.number,item.colour)" class="negative">X</button></td>
 
                 </tbody>
             </table>
@@ -181,7 +181,7 @@
                         (keydown.enter)="checkToProceed(sessionEndingPurple.valueAsNumber,0,60); !errorMessage ? editSessionEnd(item.number,item.colour,sessionEndingPurple.valueAsNumber) : null"
                         (blur)="resetInput($event, getMinuteDifference(item.sessionEnd))"> minutes</h3>
                     <h3>Session ending at {{get24HourTime(item.sessionEnd)}}</h3>
-                    <button (click)="dequeueTicket(item.number,item.colour); resetBlink(item.colour)" class="negative">END SESSION</button>
+                    <button (click)="dequeueConfirmationWrapper(item.number,item.colour); resetBlink(item.colour)" class="negative">END SESSION</button>
                 </div>
                 </div>
                 <ng-template #noItemsPurple>

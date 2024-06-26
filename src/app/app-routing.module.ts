@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TicketTrackerComponent } from './ticket-tracker/ticket-tracker.component';
 
 const routes: Routes = [
-  { path: 'ticket-management', component: TicketTrackerComponent },
+  { path: 'ticket-management', component: TicketTrackerComponent , title:'PicCho Ticket Manager'},
   { path: '', redirectTo: 'ticket-management', pathMatch: 'full' }
 ];
 
