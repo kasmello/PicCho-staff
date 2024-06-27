@@ -176,7 +176,8 @@
                     <td>{{getEstimatedWaitTime(item.number, item.colour)}}</td>
                     <td>{{get24HourTime(item.queueStart)}}</td>
                     <td>{{get24HourTime(item.promisedStart)}}</td>
-                    <td [ngClass]="{'late': get24HourTime(item.promisedStart)<get24HourTime(getEstimatedStartTime(item.number, item.colour))}">
+                    <td [ngClass]="{'late': getMinuteDifference(getEstimatedStartTime(item.number, item.colour),item.promisedStart)>=3,
+                        'early': getMinuteDifference(item.promisedStart,getEstimatedStartTime(item.number, item.colour))>0}">
                         {{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
                     <td><button (click)="startConfirmationWrapper(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activePurpleFilter).length>0" class="positive">GO</button></td>
                     <td><button (click)="dequeueConfirmationWrapper(item.number,item.colour)" class="negative">X</button></td>
