@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { TicketItem } from './ticket-model';
 import { Title } from '@angular/platform-browser';
 import { CacheStorageService } from '../cache-storage.service';
@@ -440,6 +440,10 @@ export class TicketTrackerComponent implements OnInit {
     }
   }
 
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    this.cacheStorage.saveData(this.tickets);
+  }
 
   ngOnInit(): void {
     const cachedData = this.cacheStorage.loadData();
@@ -453,29 +457,8 @@ export class TicketTrackerComponent implements OnInit {
     
     setInterval(()=> { 
       this.tickets = this.tickets.map(obj => obj)
-      this.cacheStorage.saveData(this.tickets);
     }, 1000);
-    // this.toggleHideTicket(3,"purple");
-    // this.toggleHideTicket(5,"purple");
-    // this.toggleHideTicket(7,"purple");
-    // this.queueTicket(1,"blue",3);
-    // this.sessionStart(1,"blue");
-    // this.queueTicket(2,"purple",10);
-    // this.sessionStart(2,"purple");
-    // this.dequeueTicket(2,"purple");
-    // this.toggleHideTicket(3,"purple");
-    // this.queueTicket(10,"purple",20);
-    // this.queueTicket(2,"blue",2);
-    // this.queueTicket(3,"blue",2);
-    // this.getEstimatedStartTime(2,"blue");
-    // console.log(this.getEstimatedStartTime(2,"blue"));
-    // console.log(this.getEstimatedWaitTime(2,"blue"));
-    // console.log(this.getEstimatedStartTime(3,"blue"));
-    // console.log(this.getEstimatedWaitTime(3,"blue"));
-    // this.quickSessionStart("purple",3);
-    // this.dequeueTicket(0,"purple")
-
-    // console.log(this.tickets)
+    
   }
 
 }
