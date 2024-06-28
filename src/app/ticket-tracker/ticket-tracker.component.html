@@ -42,12 +42,12 @@
                 (keydown.enter)="checkToProceed(inactiveBluePeopleVar,1,8); !errorMessage ? queueTicket('blue',inactiveBluePeopleVar) : null"><br>
                 <button (click)="checkToProceed(inactiveBluePeopleVar,1,8); !errorMessage ? queueTicket('blue',inactiveBluePeopleVar) : null" [disabled]="!inactiveBluePeopleVar">Queue</button>
                 <p *ngIf="inactiveBluePeopleVar>0&&inactiveBluePeopleVar<9">{{getSessionTime(inactiveBluePeopleVar)}} min session:<br>
-                    {{get24HourTime(getNewStartingTime('blue'))}} - 
-                    {{get24HourTime(addMinutes(getSessionTime(inactiveBluePeopleVar),getNewStartingTime('blue')))}}</p>
+                    {{getAMPMTime(getNewStartingTime('blue'))}} - 
+                    {{getAMPMTime(addMinutes(getSessionTime(inactiveBluePeopleVar),getNewStartingTime('blue')))}}</p>
             </div>
         </div>
         <div class="queue ticket-box">
-            <h2>New Customers: {{getTotalWaitTime('blue')}} minutes waiting, {{get24HourTime(getNewStartingTime('blue'))}} Starting</h2>
+            <h2>New Customers: {{getTotalWaitTime('blue')}} minutes waiting, {{getAMPMTime(getNewStartingTime('blue'))}} Starting</h2>
             <table>
                 <thead class="box-header">
                     <th>No.</th>
@@ -73,11 +73,11 @@
                         (blur)="resetInput($event, item.people)"></td>
                     <td>{{getSessionTime(item.people)}}</td>
                     <td>{{getEstimatedWaitTime(item.number, item.colour)}}</td>
-                    <td>{{get24HourTime(item.queueStart)}}</td>
-                    <td>{{get24HourTime(item.promisedStart)}}</td>
+                    <td>{{getAMPMTime(item.queueStart)}}</td>
+                    <td>{{getAMPMTime(item.promisedStart)}}</td>
                     <td [ngClass]="{'late': getMinuteDifference(getEstimatedStartTime(item.number, item.colour),item.promisedStart)>=3,
                         'early': getMinuteDifference(item.promisedStart,getEstimatedStartTime(item.number, item.colour))>0}">
-                        {{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
+                        {{getAMPMTime(getEstimatedStartTime(item.number, item.colour))}}</td>
                     <td><button (click)="startConfirmationWrapper(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activeBlueFilter).length>0" class="positive">GO</button></td>
                     <td><button (click)="dequeueConfirmationWrapper(item.number,item.colour)" class="negative">X</button></td>
 
@@ -89,12 +89,12 @@
             <div class="active-table" *ngFor="let item of tickets | filterTickets:activeBlueFilter">
                 <h1>Ticket {{ item.number }} ({{ item.name }})</h1>
                 <h3>{{item.people}} People</h3>
-                <h3>Session started at {{get24HourTime(item.sessionStart)}}</h3>
+                <h3>Session started at {{getAMPMTime(item.sessionStart)}}</h3>
                 <h3>Session ends in <input #sessionEndingBlue type="number" placeholder="0-60" min = 0 max = 60 
                     value={{updateBlinkWrapper(item.sessionEnd,item.colour)}} 
                     (keydown.enter)="checkToProceed(sessionEndingBlue.valueAsNumber,0,60); !errorMessage ? editSessionEnd(item.number,item.colour,sessionEndingBlue.valueAsNumber) : null"
                     (blur)="resetInput($event, getMinuteDifference(item.sessionEnd))"> minutes</h3>
-                <h3>Session ending at {{get24HourTime(item.sessionEnd)}}</h3>
+                <h3>Session ending at {{getAMPMTime(item.sessionEnd)}}</h3>
                 <button (click)="dequeueConfirmationWrapper(item.number,item.colour); resetBlink(item.colour)" class="negative">END SESSION</button>
             </div>
             </div>
@@ -104,8 +104,8 @@
                     (keydown.enter)="checkToProceed(queueBluePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('blue', queueBluePeopleQuickVar) : null"> People</p>
                 <button (click)="checkToProceed(queueBluePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('blue', queueBluePeopleQuickVar) : null" [disabled]="!queueBluePeopleQuickVar">Start</button>
                 <p *ngIf="queueBluePeopleQuickVar>0&&queueBluePeopleQuickVar<9">{{getSessionTime(queueBluePeopleQuickVar)}} min session:<br>
-                    {{get24HourTime()}} - 
-                    {{get24HourTime(addMinutes(getSessionTime(queueBluePeopleQuickVar)))}}</p>
+                    {{getAMPMTime()}} - 
+                    {{getAMPMTime(addMinutes(getSessionTime(queueBluePeopleQuickVar)))}}</p>
                 </div>
             </ng-template>
             
@@ -143,12 +143,12 @@
                 (keydown.enter)="checkToProceed(inactivePurplePeopleVar,1,8); !errorMessage ? queueTicket('purple',inactivePurplePeopleVar) : null"><br>
                 <button (click)="checkToProceed(inactivePurplePeopleVar,1,8); !errorMessage ? queueTicket('purple',inactivePurplePeopleVar) : null" [disabled]="!inactivePurplePeopleVar">Queue</button>
                 <p *ngIf="inactivePurplePeopleVar>0&&inactivePurplePeopleVar<9">{{getSessionTime(inactivePurplePeopleVar)}} min session:<br>
-                    {{get24HourTime(getNewStartingTime('purple'))}} - 
-                    {{get24HourTime(addMinutes(getSessionTime(inactivePurplePeopleVar),getNewStartingTime('purple')))}}</p>
+                    {{getAMPMTime(getNewStartingTime('purple'))}} - 
+                    {{getAMPMTime(addMinutes(getSessionTime(inactivePurplePeopleVar),getNewStartingTime('purple')))}}</p>
             </div>
         </div>
         <div class="queue ticket-box">
-            <h2>New Customers: {{getTotalWaitTime('purple')}} minutes waiting, {{get24HourTime(getNewStartingTime('purple'))}} Starting</h2>
+            <h2>New Customers: {{getTotalWaitTime('purple')}} minutes waiting, {{getAMPMTime(getNewStartingTime('purple'))}} Starting</h2>
             <table>
                 <thead class="box-header">
                     <th>No.</th>
@@ -174,11 +174,11 @@
                         (blur)="resetInput($event, item.people)"></td>
                     <td>{{getSessionTime(item.people)}}</td>
                     <td>{{getEstimatedWaitTime(item.number, item.colour)}}</td>
-                    <td>{{get24HourTime(item.queueStart)}}</td>
-                    <td>{{get24HourTime(item.promisedStart)}}</td>
+                    <td>{{getAMPMTime(item.queueStart)}}</td>
+                    <td>{{getAMPMTime(item.promisedStart)}}</td>
                     <td [ngClass]="{'late': getMinuteDifference(getEstimatedStartTime(item.number, item.colour),item.promisedStart)>=3,
                         'early': getMinuteDifference(item.promisedStart,getEstimatedStartTime(item.number, item.colour))>0}">
-                        {{get24HourTime(getEstimatedStartTime(item.number, item.colour))}}</td>
+                        {{getAMPMTime(getEstimatedStartTime(item.number, item.colour))}}</td>
                     <td><button (click)="startConfirmationWrapper(item.number,item.colour)" [disabled] = "(tickets | filterTickets:activePurpleFilter).length>0" class="positive">GO</button></td>
                     <td><button (click)="dequeueConfirmationWrapper(item.number,item.colour)" class="negative">X</button></td>
 
@@ -190,12 +190,12 @@
                 <div class="active-table" *ngFor="let item of tickets | filterTickets:activePurpleFilter">
                     <h1>Ticket {{ item.number }} ({{ item.name }})</h1>
                     <h3>{{item.people}} People</h3>
-                    <h3>Session started at {{get24HourTime(item.sessionStart)}}</h3>
+                    <h3>Session started at {{getAMPMTime(item.sessionStart)}}</h3>
                     <h3>Session ends in <input #sessionEndingPurple type="number" placeholder="0-60" min = 0 max = 60
                         value={{updateBlinkWrapper(item.sessionEnd,item.colour)}}
                         (keydown.enter)="checkToProceed(sessionEndingPurple.valueAsNumber,0,60); !errorMessage ? editSessionEnd(item.number,item.colour,sessionEndingPurple.valueAsNumber) : null"
                         (blur)="resetInput($event, getMinuteDifference(item.sessionEnd))"> minutes</h3>
-                    <h3>Session ending at {{get24HourTime(item.sessionEnd)}}</h3>
+                    <h3>Session ending at {{getAMPMTime(item.sessionEnd)}}</h3>
                     <button (click)="dequeueConfirmationWrapper(item.number,item.colour); resetBlink(item.colour)" class="negative">END SESSION</button>
                 </div>
                 </div>
@@ -205,8 +205,8 @@
                         (keydown.enter)="checkToProceed(queuePurplePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('purple', queuePurplePeopleQuickVar) : null"> People</p>
                     <button (click)="checkToProceed(queuePurplePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('purple', queuePurplePeopleQuickVar) : null" [disabled]="!queuePurplePeopleQuickVar">Start</button>
                     <p *ngIf="queuePurplePeopleQuickVar>0&&queuePurplePeopleQuickVar<9">{{getSessionTime(queuePurplePeopleQuickVar)}} min session:<br>
-                        {{get24HourTime()}} - 
-                        {{get24HourTime(addMinutes(getSessionTime(queuePurplePeopleQuickVar)))}}</p>
+                        {{getAMPMTime()}} - 
+                        {{getAMPMTime(addMinutes(getSessionTime(queuePurplePeopleQuickVar)))}}</p>
                     </div>
                 </ng-template>
         </div>

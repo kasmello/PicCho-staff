@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketItem } from './ticket-model';
 import { Title } from '@angular/platform-browser';
+import { CacheStorageService } from '../cache-storage.service';
 
 @Component({
   selector: 'app-ticket-tracker',
@@ -369,9 +370,9 @@ export class TicketTrackerComponent implements OnInit {
     if (index !== -1) {
       this.tickets[index].sessionEnd = this.addMinutes(minutes)
       this.tickets = this.tickets.map(obj => obj);
-      this.setSuccessMessage(`Ticket ${number}'s (${colour}) session end changed to ${this.get24HourTime(this.tickets[index].sessionEnd)}`)
+      this.setSuccessMessage(`Ticket ${number}'s (${colour}) session end changed to ${this.getAMPMTime(this.tickets[index].sessionEnd)}`)
     } else {
-      this.setErrorMessage(`Ticket ${number}'s (${colour}) session end failed to change to ${this.get24HourTime(this.tickets[index].sessionEnd)}`)
+      this.setErrorMessage(`Ticket ${number}'s (${colour}) session end failed to change to ${this.getAMPMTime(this.tickets[index].sessionEnd)}`)
     } 
   }
 
@@ -383,11 +384,21 @@ export class TicketTrackerComponent implements OnInit {
     return `${hours}:${minutes}`;
   }
 
+  getAMPMTime(date?:Date): string {
+    !date ? date = new Date() : null;
+    const hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const newHours = hours % 12 === 0 ? 12 : hours % 12;
+    const AMPM = hours >= 12 ? 'PM' : 'AM';
+    return `${newHours.toString().padStart(2,'0')}:${minutes} ${AMPM}`;
+  }
+
   dequeueTicket(number:number, colour: string) {
     const index = this.tickets.findIndex(item => item.number === number && item.colour === colour);
     if (index !== -1) {
       this.tickets[index].status = 'inactive';
       this.tickets[index].people = 0;
+      this.tickets[index].name = null;
       this.tickets[index].queueStart = null;
       this.tickets[index].promisedStart = null;
       this.tickets[index].sessionStart = null;
@@ -406,7 +417,7 @@ export class TicketTrackerComponent implements OnInit {
     }
   }
 
-  constructor(private titleService: Title) { 
+  constructor(private titleService: Title, private cacheStorage: CacheStorageService) { 
     
   }
 
@@ -431,8 +442,19 @@ export class TicketTrackerComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.resetTickets();
-    setInterval(()=> { this.tickets = this.tickets.map(obj => obj)}, 1000);
+    const cachedData = this.cacheStorage.loadData();
+    if (cachedData.length > 0) {
+      this.tickets = cachedData;
+      console.log(cachedData)
+      // this.resetTickets();
+    } else {
+      this.resetTickets();
+    }
+    
+    setInterval(()=> { 
+      this.tickets = this.tickets.map(obj => obj)
+      this.cacheStorage.saveData(this.tickets);
+    }, 1000);
     // this.toggleHideTicket(3,"purple");
     // this.toggleHideTicket(5,"purple");
     // this.toggleHideTicket(7,"purple");
