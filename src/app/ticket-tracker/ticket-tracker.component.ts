@@ -137,6 +137,16 @@ export class TicketTrackerComponent implements OnInit {
     hiddenFilter: true
   };
 
+  inactiveAllBlue = {
+    status: 'inactive',
+    colour: 'blue',
+  };
+
+  inactiveAllPurple = {
+    status: 'inactive',
+    colour: 'purple',
+  };
+
   inactiveBlueHiddenFilter = {
     status: 'inactive',
     colour: 'blue',

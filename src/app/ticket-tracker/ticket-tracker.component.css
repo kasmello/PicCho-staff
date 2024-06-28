@@ -42,6 +42,7 @@
 }
 
 .ticket-box {
+    position: relative;
     height: 96%;
     background-color: white;
     border-color: #3b336586;
@@ -273,7 +274,8 @@ input.nameInput {
 }
 
 .inputs {
-    margin-top: 40px;
+    position: relative;
+    padding-top: 40px;
 }
 
 .inputs p {
@@ -315,5 +317,25 @@ input.nameInput {
 .noActive {
     margin-top: 100px;
 }
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    z-index: 10;
+    display: none; /* Hidden by default */
+}
+
+.disabled.overlay {
+    display: block;
+}
+
+table {
+    position: relative;
+}
+
 
 

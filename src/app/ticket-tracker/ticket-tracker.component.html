@@ -37,8 +37,10 @@
             </table>
             </div>
             <div class="inputs">
+                <div class="overlay" [ngClass]="{'disabled': (tickets | filterTickets:inactiveAllBlue).length===noTickets/2}"></div>
                 <p class="focus">How many people?</p>
                 <input #inactiveBluePeople [(ngModel)]="inactiveBluePeopleVar" type="number" min=1 max=8 placeholder="1-8"
+                [disabled]="(tickets | filterTickets:inactiveAllBlue).length===noTickets/2"
                 (keydown.enter)="checkToProceed(inactiveBluePeopleVar,1,8); !errorMessage ? queueTicket('blue',inactiveBluePeopleVar) : null"><br>
                 <button (click)="checkToProceed(inactiveBluePeopleVar,1,8); !errorMessage ? queueTicket('blue',inactiveBluePeopleVar) : null" [disabled]="!inactiveBluePeopleVar">Queue</button>
                 <p *ngIf="inactiveBluePeopleVar>0&&inactiveBluePeopleVar<9">{{getSessionTime(inactiveBluePeopleVar)}} min session:<br>
@@ -47,6 +49,7 @@
             </div>
         </div>
         <div class="queue ticket-box">
+            <div class="overlay" [ngClass]="{'disabled': (tickets | filterTickets:inactiveAllBlue).length===noTickets/2}"></div>
             <h2>New Customers: {{getTotalWaitTime('blue')}} minutes waiting, {{getAMPMTime(getNewStartingTime('blue'))}} Starting</h2>
             <table>
                 <thead class="box-header">
@@ -113,7 +116,6 @@
         </div>
     </div>
     <div class="purple ticket-sub-wrapper">
-        
         <div class="inactive ticket-box">
             <div class="ticket-list">
             <table class="show">
@@ -138,8 +140,10 @@
             </table>
             </div>
             <div class="inputs">
+                <div class="overlay" [ngClass]="{'disabled': (tickets | filterTickets:inactiveAllPurple).length===noTickets/2}"></div>
                 <p class="focus">How many people?</p>
                 <input #inactivePurplePeople [(ngModel)]="inactivePurplePeopleVar" type="number" min=1 max=8 placeholder="1-8"
+                [disabled]="(tickets | filterTickets:inactiveAllPurple).length===noTickets/2"
                 (keydown.enter)="checkToProceed(inactivePurplePeopleVar,1,8); !errorMessage ? queueTicket('purple',inactivePurplePeopleVar) : null"><br>
                 <button (click)="checkToProceed(inactivePurplePeopleVar,1,8); !errorMessage ? queueTicket('purple',inactivePurplePeopleVar) : null" [disabled]="!inactivePurplePeopleVar">Queue</button>
                 <p *ngIf="inactivePurplePeopleVar>0&&inactivePurplePeopleVar<9">{{getSessionTime(inactivePurplePeopleVar)}} min session:<br>
@@ -148,6 +152,7 @@
             </div>
         </div>
         <div class="queue ticket-box">
+            <div class="overlay" [ngClass]="{'disabled': (tickets | filterTickets:inactiveAllPurple).length===noTickets/2}"></div>
             <h2>New Customers: {{getTotalWaitTime('purple')}} minutes waiting, {{getAMPMTime(getNewStartingTime('purple'))}} Starting</h2>
             <table>
                 <thead class="box-header">
