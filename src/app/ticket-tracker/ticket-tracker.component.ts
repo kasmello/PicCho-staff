@@ -440,10 +440,10 @@ export class TicketTrackerComponent implements OnInit {
     }
   }
 
-  @HostListener('window:beforeunload', ['$event'])
-  unloadNotification($event: any) {
-    this.cacheStorage.saveData(this.tickets);
-  }
+  // @HostListener('window:beforeunload', ['$event'])
+  // unloadNotification($event: any) {
+  //   this.cacheStorage.saveData(this.tickets);
+  // }
 
   ngOnInit(): void {
     const cachedData = this.cacheStorage.loadData();
@@ -456,7 +456,8 @@ export class TicketTrackerComponent implements OnInit {
     }
     
     setInterval(()=> { 
-      this.tickets = this.tickets.map(obj => obj)
+      this.tickets = this.tickets.map(obj => obj);
+      this.cacheStorage.saveData(this.tickets);
     }, 1000);
     
   }
