@@ -43,7 +43,8 @@
                 [disabled]="(tickets | filterTickets:inactiveAllBlue).length===noTickets/2"
                 (keydown.enter)="checkToProceed(inactiveBluePeopleVar,1,8); !errorMessage ? queueTicket('blue',inactiveBluePeopleVar) : null"><br>
                 <button (click)="checkToProceed(inactiveBluePeopleVar,1,8); !errorMessage ? queueTicket('blue',inactiveBluePeopleVar) : null" [disabled]="!inactiveBluePeopleVar">Queue</button>
-                <p *ngIf="inactiveBluePeopleVar>0&&inactiveBluePeopleVar<9">{{getSessionTime(inactiveBluePeopleVar)}} min session:<br>
+                <p *ngIf="inactiveBluePeopleVar>0&&inactiveBluePeopleVar<9">
+                    {{getSessionTime(inactiveBluePeopleVar)}} min session:<br>
                     {{getAMPMTime(getNewStartingTime('blue'))}} - 
                     {{getAMPMTime(addMinutes(getSessionTime(inactiveBluePeopleVar),getNewStartingTime('blue')))}}</p>
             </div>
@@ -106,7 +107,7 @@
                 <p class="quickstart">QuickStart without a ticket for<br><input #queueBluePeopleQuick [(ngModel)]="queueBluePeopleQuickVar" type="number" min=1 max=8 placeholder="1-8" 
                     (keydown.enter)="checkToProceed(queueBluePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('blue', queueBluePeopleQuickVar) : null"> People</p>
                 <button (click)="checkToProceed(queueBluePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('blue', queueBluePeopleQuickVar) : null" [disabled]="!queueBluePeopleQuickVar">Start</button>
-                <p *ngIf="queueBluePeopleQuickVar>0&&queueBluePeopleQuickVar<9">{{getSessionTime(queueBluePeopleQuickVar)}} min session:<br>
+                <p *ngIf="queueBluePeopleQuickVar>0&&queueBluePeopleQuickVar<9&&(tickets | filterTickets:inactiveAllBlue).length!==noTickets/2">{{getSessionTime(queueBluePeopleQuickVar)}} min session:<br>
                     {{getAMPMTime()}} - 
                     {{getAMPMTime(addMinutes(getSessionTime(queueBluePeopleQuickVar)))}}</p>
                 </div>
@@ -146,7 +147,8 @@
                 [disabled]="(tickets | filterTickets:inactiveAllPurple).length===noTickets/2"
                 (keydown.enter)="checkToProceed(inactivePurplePeopleVar,1,8); !errorMessage ? queueTicket('purple',inactivePurplePeopleVar) : null"><br>
                 <button (click)="checkToProceed(inactivePurplePeopleVar,1,8); !errorMessage ? queueTicket('purple',inactivePurplePeopleVar) : null" [disabled]="!inactivePurplePeopleVar">Queue</button>
-                <p *ngIf="inactivePurplePeopleVar>0&&inactivePurplePeopleVar<9">{{getSessionTime(inactivePurplePeopleVar)}} min session:<br>
+                <p *ngIf="inactivePurplePeopleVar>0&&inactivePurplePeopleVar<9">
+                    {{getSessionTime(inactivePurplePeopleVar)}} min session:<br>
                     {{getAMPMTime(getNewStartingTime('purple'))}} - 
                     {{getAMPMTime(addMinutes(getSessionTime(inactivePurplePeopleVar),getNewStartingTime('purple')))}}</p>
             </div>
@@ -209,7 +211,8 @@
                     <p class="quickstart">QuickStart without a ticket for<br><input #queuePurplePeopleQuick [(ngModel)]="queuePurplePeopleQuickVar" type="number" min=1 max=8 placeholder="1-8" 
                         (keydown.enter)="checkToProceed(queuePurplePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('purple', queuePurplePeopleQuickVar) : null"> People</p>
                     <button (click)="checkToProceed(queuePurplePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('purple', queuePurplePeopleQuickVar) : null" [disabled]="!queuePurplePeopleQuickVar">Start</button>
-                    <p *ngIf="queuePurplePeopleQuickVar>0&&queuePurplePeopleQuickVar<9">{{getSessionTime(queuePurplePeopleQuickVar)}} min session:<br>
+                    <p *ngIf="queuePurplePeopleQuickVar>0&&queuePurplePeopleQuickVar<9&&(tickets | filterTickets:inactiveAllPurple).length!==noTickets/2">
+                        {{getSessionTime(queuePurplePeopleQuickVar)}} min session:<br>
                         {{getAMPMTime()}} - 
                         {{getAMPMTime(addMinutes(getSessionTime(queuePurplePeopleQuickVar)))}}</p>
                     </div>
