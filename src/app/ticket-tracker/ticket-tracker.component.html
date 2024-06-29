@@ -107,7 +107,8 @@
                 <p class="quickstart">QuickStart without a ticket for<br><input #queueBluePeopleQuick [(ngModel)]="queueBluePeopleQuickVar" type="number" min=1 max=8 placeholder="1-8" 
                     (keydown.enter)="checkToProceed(queueBluePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('blue', queueBluePeopleQuickVar) : null"> People</p>
                 <button (click)="checkToProceed(queueBluePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('blue', queueBluePeopleQuickVar) : null" [disabled]="!queueBluePeopleQuickVar">Start</button>
-                <p *ngIf="queueBluePeopleQuickVar>0&&queueBluePeopleQuickVar<9&&(tickets | filterTickets:inactiveAllBlue).length!==noTickets/2">{{getSessionTime(queueBluePeopleQuickVar)}} min session:<br>
+                <p *ngIf="queueBluePeopleQuickVar>0&&queueBluePeopleQuickVar<9">
+                    {{getSessionTime(queueBluePeopleQuickVar)}} min session:<br>
                     {{getAMPMTime()}} - 
                     {{getAMPMTime(addMinutes(getSessionTime(queueBluePeopleQuickVar)))}}</p>
                 </div>
@@ -211,7 +212,7 @@
                     <p class="quickstart">QuickStart without a ticket for<br><input #queuePurplePeopleQuick [(ngModel)]="queuePurplePeopleQuickVar" type="number" min=1 max=8 placeholder="1-8" 
                         (keydown.enter)="checkToProceed(queuePurplePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('purple', queuePurplePeopleQuickVar) : null"> People</p>
                     <button (click)="checkToProceed(queuePurplePeopleQuickVar,1,8); !errorMessage ? quickSessionStart('purple', queuePurplePeopleQuickVar) : null" [disabled]="!queuePurplePeopleQuickVar">Start</button>
-                    <p *ngIf="queuePurplePeopleQuickVar>0&&queuePurplePeopleQuickVar<9&&(tickets | filterTickets:inactiveAllPurple).length!==noTickets/2">
+                    <p *ngIf="queuePurplePeopleQuickVar>0&&queuePurplePeopleQuickVar<9">
                         {{getSessionTime(queuePurplePeopleQuickVar)}} min session:<br>
                         {{getAMPMTime()}} - 
                         {{getAMPMTime(addMinutes(getSessionTime(queuePurplePeopleQuickVar)))}}</p>
